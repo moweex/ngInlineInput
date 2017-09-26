@@ -9,18 +9,86 @@
         <h4>Bio:</h4>
         <p>{{bio}}</p>
     </div>
+    <div class="user-bio" *ngIf="type=='emailField'">
+        <h4>Email:</h4>
+        <p>{{email}}</p>
+    </div>
+    <div class="user-bio" *ngIf="type=='selectField'">
+        <h4>Select:</h4>
+        <p>{{music}}</p>
+    </div>
+    <div class="user-bio" *ngIf="type=='autocompleteField'">
+        <h4>Auto Complete:</h4>
+        <p>{{autocomplete}}</p>
+    </div>
+
+
 
   </div>
 
 <div class="user-profile-edit" *ngIf="editMode">
-
-  <md-form-field class="example-full-width" *ngIf="type=='singleLine'">
-    <input mdInput placeholder={{placeholder}} [(ngModel)]="name">
+<!--Begin Basic Text Input Field-->
+  <md-form-field class="full-width" *ngIf="type=='singleLine'">
+    <input
+      mdInput
+      placeholder={{placeholder}}
+      [(ngModel)]="name"
+      [disabled]="isDisabled ? 'true' : 'false'"
+      [required]="isRequired ? 'true' : 'false'"
+      >
   </md-form-field>
+<!--End Basic Text Input Field-->
 
 
-  <md-form-field class="example-full-width" *ngIf="type=='multiLine'">
-    <textarea mdInput placeholder={{placeholder}} [(ngModel)]="bio">{{bio}}</textarea>
+<!--Begin Text Area Input Field-->
+  <md-form-field class="full-width" *ngIf="type=='multiLine'">
+    <textarea
+      mdInput
+      placeholder={{placeholder}}
+      [(ngModel)]="bio"
+      [disabled]="isDisabled ? 'true' : 'false'"
+      [required]="isRequired ? 'true' : 'false'"
+      >
+      {{bio}}
+    </textarea>
   </md-form-field>
+<!--End Text Area Input Field-->
+
+<!--Begin Email Input Field-->
+  <md-form-field class="full-width" *ngIf="type=='emailField'">
+    <input
+      mdInput
+      [(ngModel)]="email"
+      placeholder={{placeholder}}
+      [formControl]="emailFormControl"
+    >
+    <md-error *ngIf="emailFormControl.hasError('pattern')">
+      Please enter a valid email address
+    </md-error>
+    <md-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </md-error>
+  </md-form-field>
+<!--End Email Input Field-->
+
+<!--Begin Select Field-->
+
+  <md-select mdInput class="full-width" [(ngModel)]="music" placeholder={{placeholder}} *ngIf="type=='selectField'">
+    <md-option *ngFor="let selectOption of selectOptions" [value]="selectOption.value">
+      {{ selectOption.viewValue }}
+    </md-option>
+  </md-select>
+
+<!--End Select Field-->
+
+
+<!--Start Autocomplete Field-->
+
+
+
+<!--End Autocomplete Field-->
+
+
+
 
 </div>

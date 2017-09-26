@@ -9,13 +9,52 @@
         </button>
     </div>
   </div>
-
-
 </md-toolbar>
+
 <div class="card-content">
   <md-card-content>
-    <inline-input [type]="'singleLine'" [placeholder]="'Your Name'" [value]="''" [editMode]="isEditMode"></inline-input>
-    <inline-input [type]="'multiLine'" [placeholder]="'Your Bio'" [value]="''" [editMode]="isEditMode"></inline-input>
+    <h3>Input Fields</h3>
+    <form>
+
+    <inline-input
+      [type]="'singleLine'"
+      [placeholder]="'Text'"
+      [editMode]="isEditMode"
+    >
+    </inline-input>
+
+
+  <inline-input
+      [type]="'multiLine'"
+      [placeholder]="'Textarea'"
+      [editMode]="isEditMode"
+    >
+    </inline-input>
+
+
+    <inline-input
+      [type]="'emailField'"
+      [placeholder]="'Email'"
+      [editMode]="isEditMode"
+    >
+    </inline-input>
+
+    <inline-input
+      [type]="'selectField'"
+      [placeholder]="'Select'"
+      [editMode]="isEditMode"
+    >
+    </inline-input>
+
+    <inline-input
+      [type]="'autocompleteField'"
+      [placeholder]="'AutoComplete'"
+      [editMode]="isEditMode"
+    >
+    </inline-input>
+
+</form>
+
   </md-card-content>
 </div>
 
