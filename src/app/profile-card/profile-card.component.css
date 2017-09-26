@@ -1,0 +1,15 @@
+md-card{
+  padding: 0;
+}
+
+.toolbar-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.card-content{
+  padding: 25px;
+}
+

@@ -1,0 +1,26 @@
+
+  <div class="user-profile-view" *ngIf="!editMode">
+    <div class="user-name" *ngIf="type=='singleLine'">
+        <h4>Name:</h4>
+        <p>{{name}}</p>
+    </div>
+
+    <div class="user-bio" *ngIf="type=='multiLine'">
+        <h4>Bio:</h4>
+        <p>{{bio}}</p>
+    </div>
+
+  </div>
+
+<div class="user-profile-edit" *ngIf="editMode">
+
+  <md-form-field class="example-full-width" *ngIf="type=='singleLine'">
+    <input mdInput placeholder={{placeholder}} [(ngModel)]="name">
+  </md-form-field>
+
+
+  <md-form-field class="example-full-width" *ngIf="type=='multiLine'">
+    <textarea mdInput placeholder={{placeholder}} [(ngModel)]="bio">{{bio}}</textarea>
+  </md-form-field>
+
+</div>

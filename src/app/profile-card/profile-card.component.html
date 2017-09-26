@@ -1,0 +1,23 @@
+
+<md-card class="example-card">
+<md-toolbar color="primary">
+  <div class="toolbar-content">
+    <div class="toolbar-title">User Profile</div>
+    <div class="toolbar-action">
+      <button md-icon-button (click)="toggleEdit()">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+    </div>
+  </div>
+
+
+</md-toolbar>
+<div class="card-content">
+  <md-card-content>
+    <inline-input [type]="'singleLine'" [placeholder]="'Your Name'" [value]="''" [editMode]="isEditMode"></inline-input>
+    <inline-input [type]="'multiLine'" [placeholder]="'Your Bio'" [value]="''" [editMode]="isEditMode"></inline-input>
+  </md-card-content>
+</div>
+
+
+</md-card>
