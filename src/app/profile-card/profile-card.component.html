@@ -14,7 +14,6 @@
 <div class="card-content">
   <md-card-content>
     <h3>Input Fields</h3>
-    <form>
 
     <inline-input
       [type]="'singleLine'"
@@ -46,14 +45,16 @@
     >
     </inline-input>
 
-    <inline-input
-      [type]="'autocompleteField'"
-      [placeholder]="'AutoComplete'"
+    <inline-input style="margin: 0 20px"
+      [type]="'tagsField'"
+      [placeholder]="'Add Tags'"
       [editMode]="isEditMode"
     >
     </inline-input>
 
-</form>
+
+    <inline-input [type]="'datepickerField'" [placeholder]="'Choose Date'" [editMode]="isEditMode">
+    </inline-input>
 
   </md-card-content>
 </div>

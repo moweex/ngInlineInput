@@ -17,11 +17,16 @@
         <h4>Select:</h4>
         <p>{{music}}</p>
     </div>
-    <div class="user-bio" *ngIf="type=='autocompleteField'">
-        <h4>Auto Complete:</h4>
-        <p>{{autocomplete}}</p>
+    <div class="user-bio" *ngIf="type=='tagsField'">
+        <h4>Tags:</h4>
+        <p>
+          <span *ngFor="let selectedTag of selectedTags">{{selectedTag.display}}, </span>
+        </p>
     </div>
-
+    <div class="user-bio" *ngIf="type=='datepickerField'">
+      <h4>Date:</h4>
+      <p>{{date}}</p>
+    </div>
 
 
   </div>
@@ -72,22 +77,33 @@
 <!--End Email Input Field-->
 
 <!--Begin Select Field-->
-
   <md-select mdInput class="full-width" [(ngModel)]="music" placeholder={{placeholder}} *ngIf="type=='selectField'">
     <md-option *ngFor="let selectOption of selectOptions" [value]="selectOption.value">
       {{ selectOption.viewValue }}
     </md-option>
   </md-select>
-
 <!--End Select Field-->
 
 
-<!--Start Autocomplete Field-->
+<!--Start Tags Field-->
+<tag-input [ngModel]="selectedTags" placeholder={{placeholder}} [onlyFromAutocomplete]="true" *ngIf="type=='tagsField'" (onAdd)="onTagAdded($event)">
+  <tag-input-dropdown [displayBy]="'viewValue'" [identifyBy]="'value'" [autocompleteItems]="selectOptions">
+    <ng-template let-item="item" let-index="index">
+      {{ item.viewValue }}
+    </ng-template>
+  </tag-input-dropdown>
+  <span>Use tags values from the above select field</span>
+  </tag-input>
+<!--End Tags Field-->
 
 
-
-<!--End Autocomplete Field-->
-
+<!--Begin Datepicker Field-->
+<md-form-field class="full-width" *ngIf="type=='datepickerField'">
+  <input mdInput [mdDatepicker]="picker" placeholder={{placeholder}} (dateInput)="dateInput($event)">
+  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+  <md-datepicker #picker></md-datepicker>
+</md-form-field>
+<!--End Datepicker Field-->
 
 
 
