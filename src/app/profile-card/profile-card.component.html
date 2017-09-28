@@ -16,6 +16,7 @@
     <h3>Input Fields</h3>
 
     <inline-input
+      [(model)]="user.name"
       [type]="'singleLine'"
       [placeholder]="'Text'"
       [editMode]="isEditMode"
@@ -24,6 +25,7 @@
 
 
   <inline-input
+      [(model)]="user.bio"
       [type]="'multiLine'"
       [placeholder]="'Textarea'"
       [editMode]="isEditMode"
@@ -32,6 +34,7 @@
 
 
     <inline-input
+      [(model)]="user.email"
       [type]="'emailField'"
       [placeholder]="'Email'"
       [editMode]="isEditMode"
@@ -39,23 +42,31 @@
     </inline-input>
 
     <inline-input
+      [(model)]="user.favorite_music"
       [type]="'selectField'"
       [placeholder]="'Select'"
       [editMode]="isEditMode"
+      [options]="selectOptions"
     >
     </inline-input>
 
-    <inline-input style="margin: 0 20px"
+    <inline-input
+      style="margin: 0 20px"
+      [(model)]="user.music_genres"
       [type]="'tagsField'"
       [placeholder]="'Add Tags'"
       [editMode]="isEditMode"
+      [options]="selectOptions"
+      [tagCallback]="onTagAdded('$event')"
     >
     </inline-input>
 
 
-    <inline-input [type]="'datepickerField'" [placeholder]="'Choose Date'" [editMode]="isEditMode">
+    <inline-input [type]="'datepickerField'" [placeholder]="'Choose Date'" [(model)]="user.date" [editMode]="isEditMode" [dateCallback]="dateInput('$event')">
     </inline-input>
 
+
+<button md-raised-button color="primary" (click)="saveUser(user)">Save</button>
   </md-card-content>
 </div>
 

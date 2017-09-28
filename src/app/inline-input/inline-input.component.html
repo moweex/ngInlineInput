@@ -2,20 +2,20 @@
   <div class="user-profile-view" *ngIf="!editMode">
     <div class="user-name" *ngIf="type=='singleLine'">
         <h4>Name:</h4>
-        <p>{{name}}</p>
+        <p>{{model}}</p>
     </div>
 
     <div class="user-bio" *ngIf="type=='multiLine'">
         <h4>Bio:</h4>
-        <p>{{bio}}</p>
+        <p>{{model}}</p>
     </div>
     <div class="user-bio" *ngIf="type=='emailField'">
         <h4>Email:</h4>
-        <p>{{email}}</p>
+        <p>{{model}}</p>
     </div>
     <div class="user-bio" *ngIf="type=='selectField'">
         <h4>Select:</h4>
-        <p>{{music}}</p>
+        <p>{{model}}</p>
     </div>
     <div class="user-bio" *ngIf="type=='tagsField'">
         <h4>Tags:</h4>
@@ -37,7 +37,7 @@
     <input
       mdInput
       placeholder={{placeholder}}
-      [(ngModel)]="name"
+      [(ngModel)]="model"
       [disabled]="isDisabled ? 'true' : 'false'"
       [required]="isRequired ? 'true' : 'false'"
       >
@@ -50,7 +50,7 @@
     <textarea
       mdInput
       placeholder={{placeholder}}
-      [(ngModel)]="bio"
+      [(ngModel)]="model"
       [disabled]="isDisabled ? 'true' : 'false'"
       [required]="isRequired ? 'true' : 'false'"
       >
@@ -63,7 +63,7 @@
   <md-form-field class="full-width" *ngIf="type=='emailField'">
     <input
       mdInput
-      [(ngModel)]="email"
+      [(ngModel)]="model"
       placeholder={{placeholder}}
       [formControl]="emailFormControl"
     >
@@ -77,8 +77,8 @@
 <!--End Email Input Field-->
 
 <!--Begin Select Field-->
-  <md-select mdInput class="full-width" [(ngModel)]="music" placeholder={{placeholder}} *ngIf="type=='selectField'">
-    <md-option *ngFor="let selectOption of selectOptions" [value]="selectOption.value">
+  <md-select mdInput class="full-width" [(ngModel)]="model" placeholder={{placeholder}} *ngIf="type=='selectField'">
+    <md-option *ngFor="let selectOption of options" [value]="selectOption.value">
       {{ selectOption.viewValue }}
     </md-option>
   </md-select>
@@ -86,8 +86,8 @@
 
 
 <!--Start Tags Field-->
-<tag-input [ngModel]="selectedTags" placeholder={{placeholder}} [onlyFromAutocomplete]="true" *ngIf="type=='tagsField'" (onAdd)="onTagAdded($event)">
-  <tag-input-dropdown [displayBy]="'viewValue'" [identifyBy]="'value'" [autocompleteItems]="selectOptions">
+<tag-input [(ngModel)]="model" placeholder={{placeholder}} [onlyFromAutocomplete]="true" *ngIf="type=='tagsField'" (onAdd)="tagCallback">
+  <tag-input-dropdown [displayBy]="'viewValue'" [identifyBy]="'value'" [autocompleteItems]="options">
     <ng-template let-item="item" let-index="index">
       {{ item.viewValue }}
     </ng-template>
@@ -99,7 +99,7 @@
 
 <!--Begin Datepicker Field-->
 <md-form-field class="full-width" *ngIf="type=='datepickerField'">
-  <input mdInput [mdDatepicker]="picker" placeholder={{placeholder}} (dateInput)="dateInput($event)">
+  <input mdInput [mdDatepicker]="picker" placeholder={{placeholder}} (dateInput)="dateCallback">
   <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
   <md-datepicker #picker></md-datepicker>
 </md-form-field>

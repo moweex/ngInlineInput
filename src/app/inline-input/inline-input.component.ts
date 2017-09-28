@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
@@ -19,31 +19,29 @@ export class InlineInputComponent implements OnInit {
 
 @Input() type: string;
 @Input() placeholder: string;
-@Input() value: string;
 @Input() editMode: boolean;
 @Input() isDisabled: boolean;
 @Input() isRequired: boolean;
+@Input() options:any[];
+@Input() tagCallback;
+@Input() dateCallback;
+
+modelValue;
+@Input()
+get model() {
+  return this.modelValue;
+}
+
+
+@Output() modelChange = new EventEmitter();
+set model(val) {
+  this.modelValue = val;
+  this.modelChange.emit(this.modelValue);
+}
 
 emailFormControl = new FormControl('', [
     Validators.pattern(EMAIL_REGEX)
 ]);
-  date;
-  selectedTags: any[] = [];
-  selectOptions = [
-    {value: 'jazz', viewValue: 'Jazz'},
-    {value: 'reggae', viewValue: 'Reggae'},
-    {value: 'country', viewValue: 'Country'}
-  ];
-
-  onTagAdded(event) {
-    this.selectedTags.push(event);
-  }
-
-  dateInput(event) {
-    this.date = event.value;
-  }
-
-
 
 
 
@@ -52,8 +50,10 @@ emailFormControl = new FormControl('', [
   }
 
   ngOnInit() {
-
+    this.modelChange.emit(this.model);
   }
+
+
 
 }
 
